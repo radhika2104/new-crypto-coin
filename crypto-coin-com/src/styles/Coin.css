@@ -1,0 +1,91 @@
+.coin-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+.currency-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.name-container,
+.right-container {
+  margin: 1rem 0rem;
+  display: flex;
+  flex-wrap: unwrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4%;
+}
+
+.button-like {
+  background-color: var(--offwhite);
+  color: var(--dark-color);
+  padding: 0.3rem;
+  margin: 0.2rem;
+  border-radius: 0.3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.percentchange {
+  font-weight: 700;
+}
+
+.day-change-container {
+  margin: 3rem auto;
+  padding: 0rem 2rem;
+  max-width: 600px;
+}
+.day-change {
+  padding: 0.5rem 0rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.statistics {
+  margin: 3rem auto;
+  padding: 0rem 2rem;
+  max-width: 600px;
+}
+.decorative-line {
+  height: 0.1rem;
+  opacity: 90%;
+  border-radius: 50%;
+  margin: 0.7rem;
+  background-color: whitesmoke;
+}
+
+.stat-children {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ath-percent {
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.2rem;
+  font-size: 0.7rem;
+  background-color: var(--offwhite);
+  color: var(--dark-color);
+  margin: 0.5rem;
+  font-weight: bold;
+}
+
+@media (width<600px) {
+  .currency-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-flow: column;
+    font-size: large;
+    margin-left: 2.5rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+}

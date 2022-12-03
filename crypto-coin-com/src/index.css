@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
+
+:root {
+  --dark-color: #2b3a55;
+  --peach: #ce7777;
+  --light-peach: #e8c4c4;
+  --offwhite: #f2e5e5;
+  --dark-peach: #961414;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--dark-color);
+}
+
+body {
+  margin: 0;
+
+  font-family: "Open Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--offwhite);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@media (max-width: 700px) {
+  .hide-mobile {
+    display: none;
+  }
+}
