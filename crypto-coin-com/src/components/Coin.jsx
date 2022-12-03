@@ -16,16 +16,23 @@ const Coin = ({ currencySymbol }) => {
   };
 
   const currency = currencyReverseMap[currencySymbol];
-  console.log("currency: ", currencySymbol);
+  // console.log("currency: ", currencySymbol);
   const [coindata, setCoindata] = useState({});
+  const [description, setDescription] = useState("");
+  // const [shortDesc, setShortDesc] = useState("");
+  // const [readMore, setReadMore] = useState(false);
   const params = useParams();
   const url = `https://api.coingecko.com/api/v3/coins/${params.coinId}`;
+
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setCoindata(response.data);
+        // console.log("before setdescription:", response.data.description.en);
+        setDescription(response.data?.description.en);
+        // console.log("after setdescription:", response.data.description.en);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -35,17 +42,75 @@ const Coin = ({ currencySymbol }) => {
   //   console.log("bgcolor", percentArrow.current.backgroundColor);
   // };
 
-  // const removeLinks = (description) => {
-  //   let newstr;
-  //   let flag = true;
-  //   for (let i; i < description.length; i++) {
-  //     if (description[i] !== "<" && description[i] !== ">" && flag === true) {
-  //       newstr += description[i];
-  //     } else if (description[i] === ">") {
-  //       flag = true;
-  //     }
+  // function showDescription(){
+  //   setReadMore(true)
+  //   if (readMore === false){
+  //     // p tag to show short description
+  //     // show read more btn
+  //   } else {
+  //     // p tag to show  description
+  //     // show read less btn
   //   }
-  // };
+  // }
+
+  // function hideDescription(){
+  //   setReadMore(false)
+
+  //   if (readMore === false){
+  //     // p tag to show short description
+  //     // show read more btn
+  //   } else {
+  //     // p tag to show  description
+  //     // show read less btn
+  //   }
+  // }
+  function editDescription(text) {
+    // console.log("text:", text);
+    let newstr = "";
+    let flag = true;
+    let displayedElipsis = false;
+    let displaystr = "";
+    console.log("text?.length.......", text?.length);
+    for (let i = 0; i < text?.length; i++) {
+      // console.log("yooooooooo");
+      if (text[i] !== "<" && text[i] !== ">" && flag === true) {
+        // console.log(
+        //   "text[i].................................................first",
+        //   text[i]
+        // );
+        newstr += text[i];
+        if (i > 300 && 300 < text.length) {
+          // console.log("hahahhahaa");
+          if (displayedElipsis === false) {
+            displaystr += " ...";
+            displayedElipsis = true;
+          }
+        } else {
+          displaystr += text[i];
+        }
+      } else if (text[i] === "<") {
+        // console.log(
+        //   "text[i].................................................second",
+        //   text[i]
+        // );
+        flag = false;
+      } else if (text[i] === ">") {
+        // console.log(
+        //   "text[i].................................................third",
+        //   text[i]
+        // );
+        flag = true;
+      }
+    }
+    console.log("newstr:", newstr);
+    if (displayedElipsis === true) {
+      // document.getElementById("read-more").style.display("block");
+      // setShortDesc(displaystr)
+      return displaystr;
+    }
+    // setDescription(newstr)
+    return newstr;
+  }
 
   return (
     <div className="coin-container">
@@ -193,7 +258,17 @@ const Coin = ({ currencySymbol }) => {
         >
           {coindata.description?.en}
         </ReactReadMoreReadLess> */}
-        <p>{coindata.description?.en}</p>
+        <p>{description ? editDescription(description) : null}</p>
+        {/* <button
+          id="read-more"
+          className="button-like"
+          onClick={()=> showDescription()}
+        >
+          Read More ▼
+        </button>
+        <button id="read-less" className="button-like" onClick={()=> hideDescription()}>
+          Read Less ▲
+        </button> */}
       </div>
     </div>
   );
