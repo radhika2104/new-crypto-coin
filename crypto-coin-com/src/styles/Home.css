@@ -124,8 +124,10 @@
   margin-left: -10rem;
   display: none;
   position: relative;
+  z-index: 40;
   top: 0.2rem;
   right: 0.8rem;
+  transform: translateZ(40px);
 }
 
 .dropdown-container a {

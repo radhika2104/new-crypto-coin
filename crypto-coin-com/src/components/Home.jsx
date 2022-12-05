@@ -47,9 +47,11 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
     }
 
     return () => {
-      dropdownRef.current.removeEventListener("click", (event) =>
-        event.stopPropagation()
-      );
+      if (dropdownRef.current) {
+        dropdownRef.current.removeEventListener("click", (event) =>
+          event.stopPropagation()
+        );
+      }
     };
   }, []);
 

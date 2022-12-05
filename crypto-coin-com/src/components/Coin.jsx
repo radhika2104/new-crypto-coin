@@ -142,7 +142,9 @@ const Coin = ({ currencySymbol }) => {
       // document.getElementById("read-more").style.display("block");
       // setShortDesc(displaystr)
       setDisplayString(displaystr);
-      readmoreRef.current.style.display = "block";
+      if (readmoreRef.current) {
+        readmoreRef.current.style.display = "block";
+      }
       // console.log("displaystring state.%%%%%%%%%%%:", displaystring);
       return displaystr;
     }
