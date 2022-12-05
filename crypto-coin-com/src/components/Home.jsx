@@ -4,26 +4,15 @@ import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import Coin from "./Coin";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
   const [inputVal, setInputVal] = useState("");
   const [dropdownfields, setDropdownfields] = useState([]);
-  const [visibleDropDown, setvisibleDropDown] = useState(false);
-  console.log("dropdownfields:", dropdownfields);
-
-  // const handleDropDownSuggestion = (eventTargetValue) => {
-  //   setInputVal(eventTargetValue)
-  //   const url = `https://api.coingecko.com/api/v3/search?query=${eventTargetValue}`;
-
-  //   useEffect(() => {
-  //     axios
-  //       .get(url)
-  //       .then((response) => console.log(response.data))
-  //       .catch((error) => console.log(error));
-
-  //   }, []);
-  // };
+  // console.log("dropdownfields:", dropdownfields);
+  const dropdownRef = useRef(null);
+  const searchCompRef = useRef(null);
+  const documentContainerRef = useRef(null);
 
   useEffect(() => {
     axios
@@ -31,9 +20,9 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
         `https://api.coingecko.com/api/v3/search?query=${inputVal}&per_page=10&page=1`
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setDropdownfields(response.data);
-        console.log("dropdownfields:", dropdownfields);
+        // console.log("dropdownfields:", dropdownfields);
       })
       .catch((error) => console.log(error));
   }, [inputVal]);
@@ -43,12 +32,49 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
     return stringArray.join(" ");
   }
 
-  useEffect(() => {});
-  function hideDropDownDisplay() {}
+  function hideDropDownDisplay(event) {
+    console.log("consoling event.target...", event.target);
+    dropdownRef.current.style.display = "none";
+  }
 
-  function showDropDownDisplay() {}
+  useEffect(() => {
+    // let searchcomp = searchCompRef.current;
+    if (dropdownRef.current) {
+      console.log("helo", dropdownRef);
+      dropdownRef.current.addEventListener("click", (event) =>
+        event.stopPropagation()
+      );
+    }
+
+    return () => {
+      dropdownRef.current.removeEventListener("click", (event) =>
+        event.stopPropagation()
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    let containerRef = documentContainerRef.current;
+    if (containerRef) {
+      console.log("containerref", containerRef);
+      containerRef.addEventListener("click", (event) =>
+        hideDropDownDisplay(event)
+      );
+    }
+
+    return () => {
+      containerRef.removeEventListener("blur", (event) =>
+        hideDropDownDisplay(event)
+      );
+    };
+  }, []);
+
+  function showDropDownDisplay() {
+    dropdownRef.current.style.display = "block";
+  }
+
   return (
-    <div className="container">
+    <div className="container" ref={documentContainerRef}>
       <div className="sub-nav">
         <h2 className="cyptocurrency-heading">
           Cryptocurrency Prices by Market Cap
@@ -67,16 +93,16 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
               <option value="btc">BTC</option>
             </select>
           </li>
-          <li>
+
+          <li ref={searchCompRef} tabIndex="0">
             <input
               placeholder="🔍 Search Coin"
               type="search"
               value={inputVal}
               onChange={(event) => setInputVal(event.target.value)}
               onClick={(event) => showDropDownDisplay(event.target.value)}
-              onBlur={() => hideDropDownDisplay()}
             ></input>
-            <div className="dropdown-container">
+            <div className="dropdown-container" ref={dropdownRef}>
               {dropdownfields?.coins?.map((result) => {
                 return (
                   <Link
@@ -88,6 +114,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
                       <div className="left-side">
                         <img
                           src={result.thumb}
+                          alt=""
                           className="drop-down-image"
                         ></img>
                         <span className="dropdown-coin-name">
@@ -109,7 +136,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
         </ul>
       </div>
 
-      <div>
+      <div className="home-content">
         <div className="home-heading">
           <h3>#</h3>
           <h3 className="coin-name">Coin</h3>

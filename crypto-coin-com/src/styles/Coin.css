@@ -58,6 +58,26 @@ h2 {
   max-width: 600px;
 }
 
+.chart-container {
+  background-color: var(--light-peach);
+  margin: 3rem auto;
+  padding: 2rem 2rem;
+  max-width: 800px;
+  text-align: center;
+  border-radius: 1rem;
+}
+.chart-container canvas {
+  background-color: var(--light-peach);
+}
+
+.chartbtns {
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  margin: 1rem 0.2rem 0rem 0.2rem;
+  background-color: var(--offwhite);
+  color: var(--dark-color);
+}
+
 .decription-container {
   margin: 3rem auto;
   padding: 0rem 2rem;
