@@ -1,3 +1,13 @@
+.coin-card-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: unwrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4%;
+}
+
 .sub-nav ul li {
   list-style: none;
 }

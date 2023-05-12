@@ -1,0 +1,22 @@
+.coin-card {
+  margin: 2rem 1rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  font-size: x-large;
+  color: var(--offwhite);
+  align-items: center;
+  font-weight: 700;
+  gap: 1%;
+}
+
+.coin-image {
+  max-height: 80;
+  min-height: 20;
+}
+.coin-symbol {
+  font-size: large;
+}
+.coin-price {
+  font-size: large;
+}

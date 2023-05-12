@@ -1,19 +1,31 @@
 import React from "react";
 import CoinDetail from "./CoinDetail";
+import TrendingCoins from "./TrendingCoins";
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import Coin from "./Coin";
-// import axios from "axios";
+import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
 const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
   const [inputVal, setInputVal] = useState("");
+  const [trendingCoins, setTrendingCoins] = useState([]);
   // const [dropdownfields, setDropdownfields] = useState([]);
   // console.log("dropdownfields:", dropdownfields);
   const dropdownRef = useRef(null);
   const searchCompRef = useRef(null);
   const documentContainerRef = useRef(null);
 
+  useEffect(() => {
+    axios
+      .get(`https://api.coingecko.com/api/v3/search/trending`)
+      .then((response) => {
+        console.log(response.data);
+        setTrendingCoins(response.data?.coins);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+  console.log("trending coins:", trendingCoins);
   // Remove api method for search function because of performance (too slow because api endpoint supports only search for all results including coin/exchange/nft etc. without limit/per_page)
   // useEffect(() => {
   //   axios
@@ -89,6 +101,20 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
 
   return (
     <div className="container" ref={documentContainerRef}>
+      <div className="coin-card-container">
+        {trendingCoins.map((coin) => {
+          return (
+            <Link
+              to={`/coin/${coin.item.id}`}
+              key={coin.item.id}
+              element={<Coin currencySymbol={currencySymbol} />}
+            >
+              <TrendingCoins coin={coin} key={coin.item.id}></TrendingCoins>
+            </Link>
+          );
+        })}
+      </div>
+
       <div className="sub-nav">
         <h2 className="cyptocurrency-heading">
           Cryptocurrency Prices by Market Cap
