@@ -7,16 +7,18 @@
   color: var(--offwhite);
   align-items: center;
   font-weight: 700;
-  gap: 1%;
+  gap: 5%;
+  /* animation: slide 15s linear infinite; */
 }
 
 .coin-image {
-  max-height: 80;
+  max-height: 100px;
   min-height: 20;
 }
 .coin-symbol {
-  font-size: large;
+  margin: 1rem auto 0.3rem auto;
+  font-size: medium;
 }
 .coin-price {
-  font-size: large;
+  font-size: medium;
 }

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Coin from "./Coin";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 
 const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
   const [inputVal, setInputVal] = useState("");
@@ -99,20 +101,40 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
     dropdownRef.current.style.display = "block";
   }
 
+  const responsive = {
+    0: {
+      items: 2,
+    },
+    512: {
+      items: 4,
+    },
+  };
+  const items = trendingCoins.map((coin) => {
+    return (
+      <Link
+        to={`/coin/${coin.item.id}`}
+        key={coin.item.id}
+        element={<Coin currencySymbol={currencySymbol} />}
+      >
+        <TrendingCoins coin={coin} key={coin.item.id}></TrendingCoins>
+      </Link>
+    );
+  });
+
   return (
     <div className="container" ref={documentContainerRef}>
       <div className="coin-card-container">
-        {trendingCoins.map((coin) => {
-          return (
-            <Link
-              to={`/coin/${coin.item.id}`}
-              key={coin.item.id}
-              element={<Coin currencySymbol={currencySymbol} />}
-            >
-              <TrendingCoins coin={coin} key={coin.item.id}></TrendingCoins>
-            </Link>
-          );
-        })}
+        <AliceCarousel
+          mouseTracking
+          infinite
+          autoPlayInterval={1000}
+          animationDuration={1500}
+          disableDotsControls
+          disableButtonsControls
+          responsive={responsive}
+          autoPlay
+          items={items}
+        />
       </div>
 
       <div className="sub-nav">
