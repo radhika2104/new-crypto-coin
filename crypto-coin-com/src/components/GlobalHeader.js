@@ -52,11 +52,11 @@ ETH 18.6% */
             <span>Coins: </span>
             <span className="values">{numCoins}</span>
           </li>
-          <li>
+          <li className="hide-mobile">
             <span>Exchanges: </span>
-            <span className="values hide-mobile">{numExchanges}</span>
+            <span className="values ">{numExchanges}</span>
           </li>
-          <li>
+          <li className="global-header-li-sep">
             <span>
               Market Cap:{" "}
               <span className="values">
@@ -87,10 +87,14 @@ ETH 18.6% */
               {volume}
             </span>
           </li>
-          <li className="hide-mobile">
+          <li className="hide-mobile global-header-li-sep">
             <span>Dominance: </span>
-            <span className="values">BTC: {btcDominance}% </span>
-            <span className="values">ETH: {ethDominance}%</span>
+            <span>
+              BTC: <span className="values">{btcDominance}%</span>
+            </span>
+            <span>
+              ETH: <span className="values">{ethDominance}%</span>
+            </span>
           </li>
         </ul>
       </nav>

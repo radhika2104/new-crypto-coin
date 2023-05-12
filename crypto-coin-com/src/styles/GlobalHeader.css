@@ -21,7 +21,15 @@
   align-items: center;
   padding: 1rem 1rem;
   font-weight: 700;
-  font-size: small;
+  font-size: 0.7rem;
+}
+
+.global-header-li-sep {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  /* padding: 1rem 1rem; */
 }
 
 /* .icon {
@@ -45,6 +53,9 @@
 .global-header-container span.values {
   background-color: var(--dark-color);
   color: var(--global-bright);
+}
+span.market-cap-change {
+  color: var(--peach);
 }
 
 /* .global-header-container a {
@@ -70,13 +81,38 @@ nav ul a:active {
   font-weight: 100;
 }
 
-@media (width <500px) {
+@media ((min-width: 650px) and (max-width:850px)) {
   .global-header-container nav ul,
   nav ul {
-    font-size: 1.3rem;
+    font-size: 0.5rem;
+  }
+
+  .global-header-li-sep {
+    /* display: flex;
+      justify-content: space-between;
+      align-items: center; */
+    gap: 0.2rem;
+    /* padding: 1rem 1rem; */
+  }
+
+  /* .icon {
+      font-size: 2rem;
+    } */
+}
+@media (width <650px) {
+  .global-header-container nav ul,
+  nav ul {
+    font-size: 0.6rem;
   }
   .hide-mobile {
     display: none;
+  }
+  .global-header-li-sep {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+    gap: 0.2rem;
+    /* padding: 1rem 1rem; */
   }
 
   /* .icon {
