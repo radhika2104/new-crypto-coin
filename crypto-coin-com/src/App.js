@@ -3,6 +3,7 @@ import "./styles/App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Home from "./components/Home";
+import GlobalHeader from "./components/GlobalHeader";
 import Navbar from "./components/Navbar";
 import Exchanges from "./components/Exchanges";
 import { BrowserRouter } from "react-router-dom";
@@ -45,6 +46,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <GlobalHeader currencySymbol={currencySymbol} currency={currency} />
         <Navbar />
         <Routes>
           <Route

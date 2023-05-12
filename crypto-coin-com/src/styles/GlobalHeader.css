@@ -1,0 +1,85 @@
+.global-header-container nav ul li {
+  list-style: none;
+  color: var(--peach);
+  background-color: var(--dark-color);
+}
+
+.global-header-container {
+  background-color: var(--dark-color);
+  margin: auto;
+  font-family: "Montserrat", sans-serif;
+}
+
+.global-header-container nav {
+  max-width: 1100px;
+  margin: auto;
+}
+.global-header-container nav ul {
+  background-color: var(--dark-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  font-weight: 700;
+  font-size: small;
+}
+
+/* .icon {
+  font-size: 3rem;
+  background-color: var(--offwhite);
+  color: var(--dark-color);
+}
+
+.home-button {
+  display: flex;
+  justify-content: space-between;
+  gap: 3%;
+  align-items: center;
+} */
+
+.global-header-container span {
+  background-color: var(--dark-color);
+  color: var(--light-peach);
+}
+
+.global-header-container span.values {
+  background-color: var(--dark-color);
+  color: var(--global-bright);
+}
+
+/* .global-header-container a {
+  background-color: var(--offwhite);
+} */
+
+/* .global-header-container nav ul a {
+  text-decoration: none;
+  color: initial;
+  color: var(--peach);
+}
+nav ul a:active {
+  text-decoration: none;
+  color: initial;
+  color: var(--dark-peach);
+  font-weight: bolder;
+} */
+
+.global-header-container {
+  background-color: var(--dark-color);
+  margin: auto;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+}
+
+@media (width <500px) {
+  .global-header-container nav ul,
+  nav ul {
+    font-size: 1.3rem;
+  }
+  .hide-mobile {
+    display: none;
+  }
+
+  /* .icon {
+    font-size: 2rem;
+  } */
+}

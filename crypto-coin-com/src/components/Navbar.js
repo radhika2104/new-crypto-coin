@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { RiCopperCoinFill } from "react-icons/ri";
 import "../styles/Navbar.css";
 
-
 const Navbar = () => {
   return (
     <div className="nav-container">
