@@ -3,29 +3,41 @@ import CoinDetail from "./CoinDetail";
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import Coin from "./Coin";
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
 const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
   const [inputVal, setInputVal] = useState("");
-  const [dropdownfields, setDropdownfields] = useState([]);
+  // const [dropdownfields, setDropdownfields] = useState([]);
   // console.log("dropdownfields:", dropdownfields);
   const dropdownRef = useRef(null);
   const searchCompRef = useRef(null);
   const documentContainerRef = useRef(null);
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/search?query=${inputVal}&per_page=10&page=1`
-      )
-      .then((response) => {
-        // console.log(response.data);
-        setDropdownfields(response.data);
-        // console.log("dropdownfields:", dropdownfields);
-      })
-      .catch((error) => console.log(error));
-  }, [inputVal]);
+  // Remove api method for search function because of performance (too slow because api endpoint supports only search for all results including coin/exchange/nft etc. without limit/per_page)
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://api.coingecko.com/api/v3/search?query=${inputVal}&per_page=100&page=1`
+  //     )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setDropdownfields(response.data?.coins);
+  //       // console.log("dropdownfields:", dropdownfields);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, [inputVal]);
+
+  // using javascript functions of filter and includ to implement search functionality in already loaded api result of coins on home page
+  function SearchThroughCoinsLoaded() {
+    return coins.filter(
+      (coin) =>
+        coin.name.toLowerCase().includes(inputVal) ||
+        coin.symbol.toLowerCase().includes(inputVal) ||
+        coin.name.toUpperCase().includes(inputVal) ||
+        coin.symbol.toUpperCase().includes(inputVal)
+    );
+  }
 
   function stringThisText(inputstr) {
     let stringArray = inputstr.split(" ");
@@ -101,11 +113,15 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
               placeholder="🔍 Search Coin"
               type="search"
               value={inputVal}
+              // onChange={(event) => {
+              //   this.setInputVal(event.target.value);
+              //   this.showDropDownDisplay();
+              // }}
               onChange={(event) => setInputVal(event.target.value)}
               onClick={(event) => showDropDownDisplay(event.target.value)}
             ></input>
             <div className="dropdown-container" ref={dropdownRef}>
-              {dropdownfields?.coins?.map((result) => {
+              {SearchThroughCoinsLoaded().map((result) => {
                 return (
                   <Link
                     to={`/coin/${result.id}`}
@@ -115,7 +131,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
                     <div className="dropdown-left-right">
                       <div className="left-side">
                         <img
-                          src={result.thumb}
+                          src={result.image}
                           alt=""
                           className="drop-down-image"
                         ></img>
