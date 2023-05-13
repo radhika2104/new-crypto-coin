@@ -73,6 +73,7 @@ const Coin = ({ currencySymbol, error }) => {
       });
   }, [newstring, displaystring, url]);
 
+  console.log("want to check response error: ", indCoinError);
   useEffect(() => {
     // for calling data for chart
     axios
