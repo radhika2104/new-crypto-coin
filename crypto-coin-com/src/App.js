@@ -67,11 +67,11 @@ function App() {
           <Route path="/Exchanges" element={<Exchanges />}></Route>
           <Route
             path="/coin"
-            element={<Coin currencySymbol={currencySymbol} />}
+            element={<Coin currencySymbol={currencySymbol} error={error} />}
           >
             <Route
               path=":coinId"
-              element={<Coin currencySymbol={currencySymbol} />}
+              element={<Coin currencySymbol={currencySymbol} error={error} />}
             />
           </Route>
         </Routes>
