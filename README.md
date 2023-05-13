@@ -2,7 +2,7 @@
 
 A User friendly crypto dashboard to view coin details in your currency.
 
-🔗Live Link: []()
+🔗Live Link: [https://rm-crypto-coin.vercel.app/](https://rm-crypto-coin.vercel.app/)
 
 ## Features 💫
 
