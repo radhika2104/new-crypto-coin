@@ -1,6 +1,7 @@
 import React from "react";
 import CoinDetail from "./CoinDetail";
 import TrendingCoins from "./TrendingCoins";
+import Pagination from "./Pagination";
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import Coin from "./Coin";
@@ -17,6 +18,29 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
   const dropdownRef = useRef(null);
   const searchCompRef = useRef(null);
   const documentContainerRef = useRef(null);
+  const scrollToRef = useRef(null);
+
+  // Pagination component to replace infinite scroll on Home to review all records
+  // User is currently on this page
+  const [currentPage, setCurrentPage] = useState(1);
+  // No of Records to be displayed on each page
+  const [recordsPerPage] = useState(25);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // Records to be displayed on the current page
+  const currentRecords = coins.slice(indexOfFirstRecord, indexOfLastRecord);
+  const nPages = Math.ceil(coins.length / recordsPerPage);
+  // create an array that holds all the page numbers from 1 to nPages.
+  const N = nPages;
+  const pageNumbers = Array.from({ length: N }, (_, index) => index + 1);
+  console.log(pageNumbers);
+
+  const nextPage = () => {
+    if (currentPage !== nPages) setCurrentPage(currentPage + 1);
+  };
+  const prevPage = () => {
+    if (currentPage !== 1) setCurrentPage(currentPage - 1);
+  };
 
   useEffect(() => {
     axios
@@ -202,7 +226,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
         </ul>
       </div>
 
-      <div className="home-content">
+      <div className="home-content" ref={scrollToRef}>
         <div className="home-heading">
           <h3>#</h3>
           <h3 className="coin-name">Coin</h3>
@@ -211,7 +235,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
           <h3 className="hide-mobile ">Volume</h3>
           <h3 className="hide-mobile ">Market Cap</h3>
         </div>
-        {coins.map((coin) => {
+        {coins.slice(indexOfFirstRecord, indexOfLastRecord).map((coin) => {
           return (
             <Link
               to={`/coin/${coin.id}`}
@@ -226,6 +250,14 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
             </Link>
           );
         })}
+        <Pagination
+          pageNumbers={pageNumbers}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          scrollToRef ={scrollToRef}
+        />
       </div>
     </div>
   );
