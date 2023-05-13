@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Pagination.css";
 
-const Pagination = ({
+const PaginationE = ({
   pageNumbers,
   currentPage,
   setCurrentPage,
@@ -11,13 +11,13 @@ const Pagination = ({
 }) => {
   return (
     <div className="pagination">
-      <a href="/#" onClick={prevPage}>
+      <a href="#!" onClick={prevPage}>
         &laquo;
       </a>
 
       {pageNumbers.map((pageNum) => (
         <a
-          href="/#"
+          href="#!"
           key={pageNum}
           onClick={() => {
             setCurrentPage(pageNum);
@@ -33,11 +33,11 @@ const Pagination = ({
         </a>
       ))}
 
-      <a href="/#" onClick={nextPage}>
+      <a href="#!" onClick={nextPage}>
         &raquo;
       </a>
     </div>
   );
 };
 
-export default Pagination;
+export default PaginationE;
