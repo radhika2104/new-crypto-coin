@@ -57,6 +57,7 @@ function App() {
                   coins={coins}
                   handleCurrencyChange={handleCurrencyChange}
                   currencySymbol={currencySymbol}
+                  error={error}
                 />
               ) : (
                 <h1>{error}</h1>

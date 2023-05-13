@@ -10,7 +10,7 @@ import { useEffect, useState, useRef } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
+const Home = ({ coins, currencySymbol, handleCurrencyChange, error }) => {
   const [inputVal, setInputVal] = useState("");
   const [trendingCoins, setTrendingCoins] = useState([]);
   // const [dropdownfields, setDropdownfields] = useState([]);
@@ -140,7 +140,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
       <Link
         to={`/coin/${coin.item.id}`}
         key={coin.item.id}
-        element={<Coin currencySymbol={currencySymbol} />}
+        element={<Coin currencySymbol={currencySymbol} error={error} />}
       >
         <TrendingCoins coin={coin} key={coin.item.id}></TrendingCoins>
       </Link>
@@ -200,7 +200,12 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
                   <Link
                     to={`/coin/${result.id}`}
                     key={result.id}
-                    element={<Coin currencySymbol={currencySymbol}></Coin>}
+                    element={
+                      <Coin
+                        currencySymbol={currencySymbol}
+                        error={error}
+                      ></Coin>
+                    }
                   >
                     <div className="dropdown-left-right">
                       <div className="left-side">
@@ -242,7 +247,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
             <Link
               to={`/coin/${coin.id}`}
               key={coin.id}
-              element={<Coin currencySymbol={currencySymbol} />}
+              element={<Coin currencySymbol={currencySymbol} error={error} />}
             >
               <CoinDetail
                 coin={coin}

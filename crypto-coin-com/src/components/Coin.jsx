@@ -7,7 +7,7 @@ import ProgressBar from "./ProgressBar";
 import CoinChart from "./CoinChart";
 // import ReactReadMoreReadLess from "react-read-more-read-less";
 
-const Coin = ({ currencySymbol }) => {
+const Coin = ({ currencySymbol, error }) => {
   const currencyReverseMap = {
     "₹": "inr",
     $: "usd",
@@ -46,6 +46,7 @@ const Coin = ({ currencySymbol }) => {
   const [displaystring, setDisplayString] = useState("");
   const [days, setDays] = useState("24h");
   const [chartArray, setChartArray] = useState([]);
+  const [indCoinError, setIndCoinError] = useState("");
 
   const params = useParams();
   const url = `https://api.coingecko.com/api/v3/coins/${params.coinId}`;
@@ -66,7 +67,10 @@ const Coin = ({ currencySymbol }) => {
         setDescription(editDescription(response.data?.description.en));
         // console.log("after setdescription:", response.data.description.en);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setIndCoinError(error);
+      });
   }, [newstring, displaystring, url]);
 
   useEffect(() => {
@@ -154,6 +158,8 @@ const Coin = ({ currencySymbol }) => {
 
   return (
     <div className="coin-container">
+      <h1>{error}</h1>
+      <h1>{indCoinError}</h1>
       <div className="currency-header">
         <div className="left-container">
           <small className="button-like">
