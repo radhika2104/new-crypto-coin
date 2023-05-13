@@ -35,7 +35,7 @@ const GlobalHeader = ({ currencySymbol, currency }) => {
         );
       })
       .catch((error) => console.log(error));
-  }, [globalAttributesUrl, currencySymbol]);
+  }, [globalAttributesUrl, currencySymbol, currency]);
 
   /* Coins: 10723
 Exchanges: 739

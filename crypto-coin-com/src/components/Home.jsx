@@ -28,7 +28,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Records to be displayed on the current page
-  const currentRecords = coins.slice(indexOfFirstRecord, indexOfLastRecord);
+  // const currentRecords = coins.slice(indexOfFirstRecord, indexOfLastRecord);
   const nPages = Math.ceil(coins.length / recordsPerPage);
   // create an array that holds all the page numbers from 1 to nPages.
   const N = nPages;
@@ -89,16 +89,18 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
 
   useEffect(() => {
     // let searchcomp = searchCompRef.current;
+    let observerRefValue = null;
     if (dropdownRef.current) {
       console.log("helo", dropdownRef);
       dropdownRef.current.addEventListener("click", (event) =>
         event.stopPropagation()
       );
+      observerRefValue = dropdownRef.current;
     }
 
     return () => {
-      if (dropdownRef.current) {
-        dropdownRef.current.removeEventListener("click", (event) =>
+      if (observerRefValue) {
+        observerRefValue.current.removeEventListener("click", (event) =>
           event.stopPropagation()
         );
       }
@@ -256,7 +258,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
           setCurrentPage={setCurrentPage}
           prevPage={prevPage}
           nextPage={nextPage}
-          scrollToRef ={scrollToRef}
+          scrollToRef={scrollToRef}
         />
       </div>
     </div>
