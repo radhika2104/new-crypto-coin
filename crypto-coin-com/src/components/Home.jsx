@@ -100,7 +100,7 @@ const Home = ({ coins, currencySymbol, handleCurrencyChange }) => {
 
     return () => {
       if (observerRefValue) {
-        observerRefValue.current.removeEventListener("click", (event) =>
+        observerRefValue.removeEventListener("click", (event) =>
           event.stopPropagation()
         );
       }
